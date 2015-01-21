@@ -26,10 +26,10 @@
 		return format; 
 	}
 	/**
-	 * [diff 多少小时前、多少分钟前、多少秒前]
+	 * [ago 多少小时前、多少分钟前、多少秒前]
 	 * @return {[type]} [string]
 	 */
-	Date.prototype.diff = function(){ 
+	Date.prototype.ago = function(){ 
 		if(!arguments.length) return '';
 		var arg = arguments,
 			now=this.getTime(),
