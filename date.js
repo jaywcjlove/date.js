@@ -18,6 +18,7 @@
 			"q+" : Math.floor((this.getMonth()+3)/3), //quarter 
 			"S" : this.getMilliseconds() //millisecond 
 		}
+		console.log("ooo",o);
 		if(/(y+)/.test(format))
 			format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
 		for(var k in o) 
@@ -59,5 +60,29 @@
 		else if(_min>=1) result=parseInt(_min) +"分钟前";
 		else result="刚刚";
 		return result;
+	}
+	/**
+	 * [toHHMMSS 超过分钟以分钟为单位，超过小时以小时为单位]
+	 * @param  {[type]} format ["123112".toHHMMSS('hh时mm分ss秒')]
+	 * @return {[type]} [number]
+	 */
+	String.prototype.toHHMMSS = function(format) {
+		var str = this.replace(/^\s\s*/, ''),hour, minute, second,o;
+		if(!str.length&&str.length>0) return '';
+		str = parseInt(str)
+		
+		hour = parseInt(str/3600)
+		minute = parseInt(str/60)
+		if(minute>=60) minute=minute%60
+	    second = str % 60;
+		o = {
+			"h+":hour,
+			"m+":minute,
+			"s+":second
+		}
+		for(var k in o) 
+			if(new RegExp("("+ k +")").test(format)) 
+			format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length));
+  		return format
 	}
 })(window);
