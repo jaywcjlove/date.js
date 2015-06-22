@@ -61,6 +61,15 @@
 		return result;
 	}
 	/**
+	 * [TZC 解决因时区变更，导致显示服务器时间不准确 time Zone Converter]
+	 * @param {[type]} timeZone [时区]
+	 */
+	Date.prototype.TZC = function(timeZone){ 
+		var new_date = new Date(),
+			old_date = this.getTime();
+			return (isNaN(timeZone)&&!timeZone)? this : new Date(old_date + new_date.getTimezoneOffset() * 60 * 1000 + timeZone * 60 * 60 * 1000 );
+	}
+	/**
 	 * [toHHMMSS 超过分钟以分钟为单位，超过小时以小时为单位]
 	 * @param  {[type]} format ["123112".toHHMMSS('hh时mm分ss秒')]
 	 * @return {[type]} [number]
