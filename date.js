@@ -1,5 +1,5 @@
 /**
- * Copyright © kacper.wang 
+ * Copyright © kacper.wang
  * http://jaywcjlove.github.io
  */
 ;(function(window){
@@ -8,28 +8,28 @@
 	 * @param  {[type]} format ["YYYY年MM月dd日hh小时mm分ss秒"]
 	 * @return {[type]}        [string]
 	 */
-	Date.prototype.format = function(format){ 
-		var o = { 
-			"M+" : this.getMonth()+1, //month 
-			"d+" : this.getDate(), //day 
-			"h+" : this.getHours(), //hour 
-			"m+" : this.getMinutes(), //minute 
-			"s+" : this.getSeconds(), //second 
-			"q+" : Math.floor((this.getMonth()+3)/3), //quarter 
-			"S" : this.getMilliseconds() //millisecond 
+	Date.prototype.format = function(format){
+		var timeFormat = {
+			"M+" : this.getMonth()+1, //month
+			"d+" : this.getDate(), //day
+			"h+" : this.getHours(), //hour
+			"m+" : this.getMinutes(), //minute
+			"s+" : this.getSeconds(), //second
+			"q+" : Math.floor((this.getMonth()+3)/3), //quarter
+			"S" : this.getMilliseconds() //millisecond
 		}
 		if(/(y+)/.test(format))
 			format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
-		for(var k in o) 
-			if(new RegExp("("+ k +")").test(format)) 
-			format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length));
-		return format; 
+		for(var k in timeFormat)
+			if(new RegExp("("+ k +")").test(format))
+			format = format.replace(RegExp.$1, RegExp.$1.length==1 ? timeFormat[k] : ("00"+ timeFormat[k]).substr((""+ timeFormat[k]).length));
+		return format;
 	}
 	/**
 	 * [ago 多少小时前、多少分钟前、多少秒前]
 	 * @return {[type]} [string]
 	 */
-	Date.prototype.ago = function(){ 
+	Date.prototype.ago = function(){
 		if(!arguments.length) return '';
 		var arg = arguments,
 			now=this.getTime(),
@@ -64,7 +64,7 @@
 	 * [TZC 解决因时区变更，导致显示服务器时间不准确 time Zone Converter]
 	 * @param {[type]} timeZone [时区]
 	 */
-	Date.prototype.TZC = function(timeZone){ 
+	Date.prototype.TZC = function(timeZone){
 		var new_date = new Date(),
 			old_date = this.getTime();
 			return (isNaN(timeZone)&&!timeZone)? this : new Date(old_date + new_date.getTimezoneOffset() * 60 * 1000 + timeZone * 60 * 60 * 1000 );
@@ -75,25 +75,25 @@
 	 * @return {[type]} [number]
 	 */
 	String.prototype.toHHMMSS = function(format) {
-		var str = this.replace(/^\s\s*/, ''),hour, minute, second,o;
+		var str = this.replace(/^\s\s*/, ''),hour, minute, second,timeFormat;
 		if(!str.length&&str.length>0) return '';
 		str = parseInt(str)
-		
+
 		hour = parseInt(str/3600)
 		minute = parseInt(str/60)
 		if(minute>=60) minute=minute%60
 	    second = str % 60;
-		o = {
+		timeFormat = {
 			"h+":hour,
 			"m+":minute,
 			"s+":second
 		}
-		for(var k in o) {
+		for(var k in timeFormat) {
 			if(new RegExp("("+ k +")").test(format)) {
 				if(RegExp.$1 == "hh"&&hour>99){
 					format = format.replace('hh',hour)
 				}else{
-					format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length))
+					format = format.replace(RegExp.$1, RegExp.$1.length==1 ? timeFormat[k] : ("00"+ timeFormat[k]).substr((""+ timeFormat[k]).length))
 				}
 			}
 		};
