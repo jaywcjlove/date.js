@@ -35,8 +35,7 @@
 			now=this.getTime(),
 			past =  !isNaN(arg[0])?arg[0]:new Date(arg[0]).getTime(),
 			diffValue = now - past,
-			result=''
-			console.log(new Date(past).getTime(),"2332")
+			result='',
 			minute = 1000 * 60,
 			hour = minute * 60,
 			day = hour * 24,
