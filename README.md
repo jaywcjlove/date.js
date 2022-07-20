@@ -3,7 +3,7 @@ Date Extension
 
 [![Stargazers](https://img.shields.io/github/stars/jaywcjlove/date.js.svg)](https://github.com/jaywcjlove/date.js/stargazers) 
 [![Releases](https://img.shields.io/github/release/jaywcjlove/date.js.svg)](https://github.com/jaywcjlove/date.js/releases)
-[![Build & Deploy](https://github.com/jaywcjlove/date.js/actions/workflows/ci.yml/badge.svg)](https://github.com/jaywcjlove/date.js/actions/workflows/ci.yml)
+[![CI](https://github.com/jaywcjlove/date.js/actions/workflows/ci.yml/badge.svg)](https://github.com/jaywcjlove/date.js/actions/workflows/ci.yml)
 [![Open in unpkg](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/@wcj/date/file/README.md)
 [![npm version](https://img.shields.io/npm/v/@wcj/date.svg)](https://www.npmjs.com/package/@wcj/date)
 [![Coverage Status](https://jaywcjlove.github.io/date.js/badges.svg)](https://jaywcjlove.github.io/date.js/lcov-report/)
