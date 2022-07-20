@@ -25,7 +25,8 @@
     "coverage": "tsbb test --coverage"
   },
   "files": [
-    "date.js"
+    "src",
+    "lib"
   ],
   "devDependencies": {
     "tsbb": "~3.7.0"
