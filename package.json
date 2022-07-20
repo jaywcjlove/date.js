@@ -28,6 +28,6 @@
     "date.js"
   ],
   "devDependencies": {
-    "tsbb": "~3.7.0"
+    "tsbb": "3.7.6"
   }
 }
