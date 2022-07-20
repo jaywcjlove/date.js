@@ -82,3 +82,31 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./package.json
+
+    outputs:
+      successful: ${{steps.create_tag.outputs.successful }}
+
+  github-package:
+    runs-on: ubuntu-18.04
+    needs: build-deploy
+    if: needs.build-deploy.outputs.successful
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://npm.pkg.github.com
+          scope: '@jaywcjlove'
+
+      - run: npm install
+      - run: npm run build
+
+      - name: Modify @wcj/date => @jaywcjlove/date
+        uses: jaywcjlove/github-action-package@main
+        with:
+          data: |
+            { "name": "@jaywcjlove/date" }
+  
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
