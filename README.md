@@ -29,7 +29,7 @@ Or manually download and link **@wcj/date** in your HTML, It can also be downloa
 
 CDN: [UNPKG](https://unpkg.com/@wcj/date/) | [jsDelivr](https://cdn.jsdelivr.net/npm/@wcj/date/)
 
-```js
+```html
 <script src="https://unpkg.com/@wcj/date/lib/index.js"></script>
 <script type="text/javascript">
 new Date('2015-10-12 23:01:11').format("yyyy年MM月dd日 hh:mm:ss");
