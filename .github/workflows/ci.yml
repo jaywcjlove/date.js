@@ -1,0 +1,85 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - run: npm install
+      - run: npm run build
+      - run: npm run type-check
+      - run: npm run coverage
+
+      - name: Converts Markdown to HTML
+        uses: jaywcjlove/markdown-to-html-cli@main
+        with:
+          source: README.md
+          output: coverage/index.html
+          github-corners: https://github.com/jaywcjlove/date.js
+      
+      - name: Create Coverage Badges
+        uses: jaywcjlove/coverage-badges-cli@main
+
+      - name: Generate Contributors Images
+        uses: jaywcjlove/github-action-contributors@main
+        with:
+          filter-author: (renovate\[bot\]|renovate-bot|dependabot\[bot\])
+          output: coverage/CONTRIBUTORS.svg
+          avatarSize: 42
+
+      # - name: Create Tag
+      #   id: create_tag
+      #   uses: jaywcjlove/create-tag-action@v1.3.8
+      #   with:
+      #     package-path: ./package.json
+
+
+      # - name: get tag version
+      #   id: tag_version
+      #   uses: jaywcjlove/changelog-generator@v1.5.7
+
+      # - name: Deploy
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     user_name: 'github-actions[bot]'
+      #     user_email: 'github-actions[bot]@users.noreply.github.com'
+      #     commit_message: ${{steps.tag_version.outputs.tag}} ${{ github.event.head_commit.message }}
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./coverage
+
+      # - name: Generate Changelog
+      #   id: changelog
+      #   uses: jaywcjlove/changelog-generator@v1.5.7
+      #   with:
+      #     head-ref: ${{steps.create_tag.outputs.version}}
+      #     filter-author: (jaywcjlove|小弟调调™|dependabot|renovate\\[bot\\]|dependabot\\[bot\\]|Renovate Bot)
+      #     # filter-author: (小弟调调™|Renovate Bot)
+      #     filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
+
+      # - name: Create Release
+      #   uses: ncipollo/release-action@v1
+      #   if: steps.create_tag.outputs.successful
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     name: ${{ steps.create_tag.outputs.version }}
+      #     tag: ${{ steps.create_tag.outputs.version }}
+      #     body: |
+      #       [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/@wcj/date@${{steps.create_tag.outputs.versionNumber}}/file/README.md) 
+            
+      #       Documentation ${{ steps.changelog.outputs.tag }}: https://raw.githack.com/jaywcjlove/date.js/${{ steps.changelog.outputs.gh-pages-short-hash }}/index.html  
+      #       Comparing Changes: ${{ steps.changelog.outputs.compareurl }}  
+            
+      #       ${{ steps.changelog.outputs.changelog }}
+
+      # - uses: JS-DevTools/npm-publish@v1
+      #   with:
+      #     token: ${{ secrets.NPM_TOKEN }}
+      #     package: ./package.json

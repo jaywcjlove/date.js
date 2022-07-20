@@ -1,0 +1,33 @@
+{
+  "name": "@wcj/date",
+  "version": "0.0.1",
+  "description": "date time operations",
+  "author": "Kenny Wang<wowohoo@qq.com>",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaywcjlove/date.js"
+  },
+  "keywords": [
+    "format",
+    "ago",
+    "toHHMMSS",
+    "TZC",
+    "date",
+    "date.js"
+  ],
+  "scripts": {
+    "watch": "tsbb watch --disable-babel",
+    "build": "tsbb build --disable-babel",
+    "type-check": "tsc --noEmit",
+    "test": "tsbb test",
+    "coverage": "tsbb test --coverage"
+  },
+  "files": [
+    "date.js"
+  ],
+  "devDependencies": {
+    "tsbb": "~3.7.0"
+  }
+}

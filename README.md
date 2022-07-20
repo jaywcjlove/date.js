@@ -1,10 +1,35 @@
-# date 时间操作
+Date Extension
+===
 
-[![](https://img.shields.io/github/issues/jaywcjlove/date.js.svg)](https://github.com/jaywcjlove/date.js/issues) [![](https://img.shields.io/github/forks/jaywcjlove/date.js.svg)](https://github.com/jaywcjlove/date.js/network) [![](https://img.shields.io/github/stars/jaywcjlove/date.js.svg)](https://github.com/jaywcjlove/date.js/stargazers) [![](https://img.shields.io/github/release/jaywcjlove/date.js.svg)](https://github.com/jaywcjlove/date.js/releases)
+[![Stargazers](https://img.shields.io/github/stars/jaywcjlove/date.js.svg)](https://github.com/jaywcjlove/date.js/stargazers) 
+[![Releases](https://img.shields.io/github/release/jaywcjlove/date.js.svg)](https://github.com/jaywcjlove/date.js/releases)
+[![Build & Deploy](https://github.com/jaywcjlove/date.js/actions/workflows/ci.yml/badge.svg)](https://github.com/jaywcjlove/date.js/actions/workflows/ci.yml)
+[![Open in unpkg](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/@wcj/date/file/README.md)
+[![npm version](https://img.shields.io/npm/v/@wcj/date.svg)](https://www.npmjs.com/package/@wcj/date)
+[![Coverage Status](https://jaywcjlove.github.io/date.js/badges.svg)](https://jaywcjlove.github.io/date.js/lcov-report/)
 
-## format
+JavaScript function for converting timestamps or Date objects to formatted strings, manipulate dates.
 
-> 格式化时间
+## Installation
+
+```bash
+npm install @wcj/date
+```
+
+## Usage
+
+```js
+import '@wcj/date';
+
+new Date('2015-10-12 23:01:11').format("yyyy年MM月dd日 hh:mm:ss");
+//⇒ "2015年10月12日 23:01:11"
+```
+
+## API
+
+### format
+
+> format time
 
 ```js
 new Date('2015-10-12 23:01:11').format("yyyy年MM月dd日 hh:mm:ss");
@@ -15,10 +40,9 @@ var testStr = testDate.format("yyyy年MM月dd日hh小时mm分ss秒");
 //=> testStr =  2015年01月20日 19小时21分03秒
 ```
 
-
 ### ago
 
-> 多少小时前、多少分钟前、多少秒前
+> How many hours ago, how many minutes ago, how many seconds ago
 
 ```js
 new Date(1421313395359).ago(1411430400000)
@@ -33,8 +57,8 @@ new Date('2010-02-02').ago('1987-04-03')
 
 ### toHHMMSS
 
-> 时间转换,倒计时  '毫秒'.toHHMMSS(输出格式)
-> 这个是基于 String 原型扩展出来的
+> Time conversion, countdown 'milliseconds'.toHHMMSS(output format)
+> This is an extension based on the String prototype
 
 ```js
 var dt = (new Date().getTime()).toString()
@@ -43,11 +67,24 @@ dt.toHHMMSS('hh时mm分ss秒') //=> 34时11分52秒
 
 ### TZC
 
-> 解决因时区变更，导致显示服务器时间不准确
-
+> Solve the inaccurate display of server time due to time zone changes
 
 ```js
-//服务端传入前端一般为秒，前端时间戳为毫秒所以要乘以1000
-//8 为服务器时间时区
+// The server's incoming front-end is generally seconds, and the front-end timestamp is milliseconds, so it needs to be multiplied by 1000
+// 8 is the server time time zone
 new Date(1434701732*1000).TZC(8)
 ```
+
+## Contributors
+
+As always, thanks to our amazing contributors!
+
+<a href="https://github.com/jaywcjlove/date.js/graphs/contributors">
+  <img src="https://jaywcjlove.github.io/date.js/CONTRIBUTORS.svg" />
+</a>
+
+Made with [action-contributors](https://github.com/jaywcjlove/github-action-contributors).
+
+## License
+
+MIT © [Kenny Wong](https://github.com/jaywcjlove)
