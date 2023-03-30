@@ -5,6 +5,7 @@
   "author": "Kenny Wang<wowohoo@qq.com>",
   "license": "MIT",
   "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jaywcjlove/date.js"
@@ -18,8 +19,8 @@
     "date.js"
   ],
   "scripts": {
-    "watch": "tsbb watch --disable-babel",
-    "build": "tsbb build --disable-babel",
+    "watch": "tsbb watch",
+    "build": "tsbb build",
     "type-check": "tsc --noEmit",
     "test": "tsbb test",
     "coverage": "tsbb test --coverage"
@@ -29,6 +30,6 @@
     "lib"
   ],
   "devDependencies": {
-    "tsbb": "~3.7.0"
+    "tsbb": "^4.0.6"
   }
 }

@@ -13,6 +13,7 @@
     "stripInternal": true,
     "esModuleInterop": false,
     "noImplicitAny": true,
+    "skipLibCheck": true,
     "outDir": "lib",
     "baseUrl": "."
   },
