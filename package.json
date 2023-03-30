@@ -29,6 +29,6 @@
     "lib"
   ],
   "devDependencies": {
-    "tsbb": "~3.7.0"
+    "tsbb": "~4.0.0"
   }
 }
