@@ -95,30 +95,30 @@ jobs:
     outputs:
       successful: ${{steps.create_tag.outputs.successful }}
 
-  github-package:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      id-token: write
-    needs: build-deploy
-    if: needs.build-deploy.outputs.successful
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          registry-url: https://npm.pkg.github.com
-          scope: '@jaywcjlove'
+  # github-package:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #     id-token: write
+  #   needs: build-deploy
+  #   if: needs.build-deploy.outputs.successful
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 18
+  #         registry-url: https://npm.pkg.github.com
+  #         scope: '@jaywcjlove'
 
-      - run: npm install
-      - run: npm run build
+  #     - run: npm install
+  #     - run: npm run build
 
-      - name: Modify @wcj/date => @jaywcjlove/date
-        uses: jaywcjlove/github-action-package@main
-        with:
-          rename: '@jaywcjlove/date'
+  #     - name: Modify @wcj/date => @jaywcjlove/date
+  #       uses: jaywcjlove/github-action-package@main
+  #       with:
+  #         rename: '@jaywcjlove/date'
   
-      - run: npm publish --access public --provenance
-        continue-on-error: true
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  #     - run: npm publish --access public --provenance
+  #       continue-on-error: true
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
