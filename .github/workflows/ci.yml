@@ -11,10 +11,10 @@ jobs:
       contents: write
       id-token: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 18
+          node-version: 24
           registry-url: 'https://registry.npmjs.org'
 
       - run: npm install
@@ -31,7 +31,7 @@ jobs:
             Sponsor: https://jaywcjlove.github.io/#/sponsor
           EOF
       
-      - run: npm install idoc@1.27.2 -g
+      - run: npm install idoc@1 -g
       - run: idoc --output="coverage"
   
       - name: Create Coverage Badges
@@ -56,7 +56,7 @@ jobs:
         uses: jaywcjlove/changelog-generator@main
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
@@ -76,6 +76,7 @@ jobs:
         uses: ncipollo/release-action@v1
         if: steps.create_tag.outputs.successful
         with:
+          allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ steps.create_tag.outputs.version }}
           tag: ${{ steps.create_tag.outputs.version }}
@@ -89,8 +90,6 @@ jobs:
 
       - run: npm publish --access public --provenance
         continue-on-error: true
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     outputs:
       successful: ${{steps.create_tag.outputs.successful }}
